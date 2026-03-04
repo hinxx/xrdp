@@ -44,7 +44,7 @@ jobs:
             pkg-config \
             check \
             libcmocka-dev \
-            systemd-dev \
+            libsystemd-dev \
             libpam0g-dev \
             libssl-dev \
             libx11-dev \
