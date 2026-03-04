@@ -36,6 +36,7 @@ jobs:
 
       - name: Build package
         run: |
+          chmod +x bootstrap
           chmod +x debian/rules
           debuild -b -us -uc
           mkdir build-artifacts
