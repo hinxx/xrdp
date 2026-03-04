@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -32,7 +32,26 @@ jobs:
             libopus-dev \
             libmp3lame-dev \
             libpixman-1-dev \
-            nasm
+            nasm \
+            autoconf \
+            automake \
+            clang \
+            gcc \
+            g++ \
+            libtool \
+            make \
+            nasm \
+            pkg-config \
+            check \
+            libcmocka-dev \
+            systemd-dev \
+            libpam0g-dev \
+            libssl-dev \
+            libx11-dev \
+            libxrandr-dev \
+            libxfixes-dev \
+            libxkbfile-dev \
+            git
 
       - name: Build package
         run: |
