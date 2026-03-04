@@ -1,0 +1,48 @@
+name: Build Debian Package
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            devscripts \
+            debhelper \
+            autoconf \
+            automake \
+            libtool \
+            pkg-config \
+            libssl-dev \
+            libpam0g-dev \
+            libx11-dev \
+            libxfixes-dev \
+            libxrandr-dev \
+            libjpeg-dev \
+            libfuse-dev \
+            libopus-dev \
+            libmp3lame-dev \
+            libpixman-1-dev \
+            nasm
+
+      - name: Build package
+        run: |
+          chmod +x debian/rules
+          debuild -b -us -uc
+          mkdir build-artifacts
+          mv ../*.deb build-artifacts/
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: xrdp-deb
+          path: build-artifacts/*.deb

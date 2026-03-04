@@ -1,0 +1,17 @@
+Source: xrdp
+Section: net
+Priority: optional
+Maintainer: Maintainer <maintainer@example.com>
+Build-Depends: debhelper (>= 10), autoconf, automake, libtool, pkg-config, libssl-dev, libpam0g-dev, libx11-dev, libxfixes-dev, libxrandr-dev, libjpeg-dev, libfuse-dev, libopus-dev, libmp3lame-dev, libpixman-1-dev, nasm
+Standards-Version: 4.0.0
+
+Package: xrdp
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, adduser, ssl-cert
+Recommends: xorgxrdp
+Description: Remote Desktop Protocol (RDP) server
+ xrdp provides a graphical login to remote machines using Microsoft
+ Remote Desktop Protocol (RDP).
+ .
+ It accepts connections from a variety of RDP clients: FreeRDP,
+ rdesktop, NeutrinoRDP and Microsoft Remote Desktop Client.

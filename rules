@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	./bootstrap
+	dh_auto_configure -- \
+		--enable-ipv6 \
+		--enable-jpeg \
+		--enable-fuse \
+		--enable-mp3lame \
+		--enable-pixman \
+		--with-socketdir=/run/xrdp \
+		--sysconfdir=/etc \
+		--localstatedir=/var
+
+override_dh_auto_install:
+	dh_auto_install
+	# Remove keys generated during install; they should be generated post-install
+	rm -f debian/xrdp/etc/xrdp/rsakeys.ini
+	rm -f debian/xrdp/etc/xrdp/cert.pem
+	rm -f debian/xrdp/etc/xrdp/key.pem

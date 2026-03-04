@@ -1,0 +1,25 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        # Create xrdp group and user if they don't exist
+        if ! getent group xrdp > /dev/null; then
+            addgroup --system xrdp
+        fi
+        if ! getent passwd xrdp > /dev/null; then
+            adduser --system --ingroup xrdp --home /var/run/xrdp --no-create-home --shell /bin/false xrdp
+        fi
+
+        # Generate RSA keys if missing
+        if [ ! -e /etc/xrdp/rsakeys.ini ]; then
+            xrdp-keygen xrdp /etc/xrdp/rsakeys.ini
+            chmod 640 /etc/xrdp/rsakeys.ini
+            chown root:xrdp /etc/xrdp/rsakeys.ini
+        fi
+
+        # Note: TLS certificates are usually handled by ssl-cert or manual configuration
+    ;;
+esac
+
+#DEBHELPER#
