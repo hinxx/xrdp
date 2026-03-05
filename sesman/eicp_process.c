@@ -41,6 +41,7 @@
 #include "sesman_access.h"
 #include "sesman_config.h"
 #include "guid.h"
+#include "string_calls.h"
 
 /******************************************************************************/
 
